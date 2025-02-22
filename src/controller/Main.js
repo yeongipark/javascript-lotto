@@ -15,20 +15,14 @@ export default class Main {
     const purchasePrice = await errorHandler(
       this.#inputPurchasePrice.bind(this)
     );
-
-    this.#lottoMachine = new LottoMachine(purchasePrice);
-    this.printLottos();
-
+    this.printLottos(purchasePrice);
     const winningNumbers = await errorHandler(
       this.#inputWinningNumbers.bind(this)
     );
-
     const bonusNumber = await errorHandler(() =>
       this.#inputBonusNumber.bind(this)(winningNumbers)
     );
-
     this.printStatistics(winningNumbers, bonusNumber);
-
     await this.#inputRestart();
   }
 
@@ -37,6 +31,14 @@ export default class Main {
     const parsedPurchasePrice = parser.toNumber(purchasePrice);
     PurchasePriceValidator.purchasePrice(parsedPurchasePrice);
     return parsedPurchasePrice;
+  }
+
+  printLottos(purchasePrice) {
+    this.#lottoMachine = new LottoMachine(purchasePrice);
+    const lottos = this.#lottoMachine.getLottosNumber();
+    output.lottoAmount(lottos.length);
+    output.lottoNumbers(lottos);
+    output.newLine();
   }
 
   async #inputWinningNumbers() {
@@ -64,21 +66,9 @@ export default class Main {
       winningNumbers,
       bonusNumber
     );
-    Object.entries(countStatistics).forEach(([rank, amount]) =>
-      output.matchResult(rank, amount)
-    );
 
+    output.matchResult(countStatistics);
     output.winningRate(this.#lottoMachine.getWinningRate(countStatistics));
-
-    output.newLine();
-  }
-
-  printLottos() {
-    const lottos = this.#lottoMachine.getLottosNumber();
-    output.lottoAmount(lottos.length);
-    lottos.forEach((lottoNumber) => {
-      output.lottoNumbers(lottoNumber);
-    });
     output.newLine();
   }
 }

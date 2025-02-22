@@ -11,10 +11,11 @@ const output = {
     this.print(OUTPUT_MESSAGE.LOTTO_AMOUNT(lottoAmount));
   },
 
-  lottoNumbers(lottoNumbers) {
-    const copyLottoNumbers = [...lottoNumbers];
-    copyLottoNumbers.sort((a, b) => a - b);
-    this.print(`[${copyLottoNumbers.join(DEFINITION.SPLIT)}]`);
+  lottoNumbers(lottosNumber) {
+    lottosNumber.forEach((lottoNumbers) => {
+      const sortedLottoNumbers = lottoNumbers.toSorted((a, b) => a - b);
+      this.print(`[${sortedLottoNumbers.join(DEFINITION.SPLIT)}]`);
+    });
   },
 
   winningStatistics() {
@@ -26,9 +27,11 @@ const output = {
     this.print(DEFINITION.EMPTY);
   },
 
-  matchResult(rank, amount) {
-    const prize = DEFINITION.LOTTO_PRISE[rank].toLocaleString();
-    this.print(OUTPUT_MESSAGE.MATCH_RESULT(rank, amount, prize));
+  matchResult(countStatistics) {
+    Object.entries(countStatistics).forEach(([rank, amount]) => {
+      const prize = DEFINITION.LOTTO_PRISE[rank].toLocaleString();
+      this.print(OUTPUT_MESSAGE.MATCH_RESULT(rank, amount, prize));
+    });
   },
 
   winningRate(rate) {
