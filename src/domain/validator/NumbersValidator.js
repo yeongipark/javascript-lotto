@@ -1,4 +1,5 @@
 import validationUtils from "../../util/validationUtil.js";
+import ERROR from "../../constant/Error.js";
 
 export default class NumbersValidator {
   static numbers(numbers) {

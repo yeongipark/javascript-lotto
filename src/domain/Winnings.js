@@ -1,29 +1,14 @@
 import DEFINITION from "../constant/Definition.js";
-import Validator from "./Validator.js";
 import { RANK } from "../constant/Definition.js";
+import NumbersValidator from "./\bvalidator/NumbersValidator.js";
+import BonusNumberValidator from "./\bvalidator/BonusNumberValidator.js";
 
 export default class Winnings {
   constructor(numbers, bonusNumber) {
-    this.validateWinnings(numbers);
-    this.validateBonusNumber(bonusNumber);
-    this.validateWinningsAndBonus(numbers, bonusNumber);
+    NumbersValidator.numbers(numbers);
+    BonusNumberValidator.bonusNumber(numbers, bonusNumber);
     this.numbers = numbers;
     this.bonusNumber = bonusNumber;
-  }
-
-  validateWinnings(numbers) {
-    const errorResults = Validator.winningNumbers(numbers);
-    if (Object.values(errorResults).some((value) => value)) throw new Error();
-  }
-
-  validateBonusNumber(bonusNumber) {
-    const errorResults = Validator.bonusNumber(bonusNumber);
-    if (Object.values(errorResults).some((value) => value)) throw new Error();
-  }
-
-  validateWinningsAndBonus(numbers, bonusNumber) {
-    const errorResults = Validator.winningsAndBonus(numbers, bonusNumber);
-    if (Object.values(errorResults).some((value) => value)) throw new Error();
   }
 
   countStatistics(lottos) {
