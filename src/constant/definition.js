@@ -7,11 +7,11 @@ export const RANK = {
 };
 
 export const LOTTO_PRISE = {
-  [RANK.FIFTH]: 5000,
-  [RANK.FOURTH]: 50000,
-  [RANK.THIRD]: 1500000,
-  [RANK.SECOND]: 30000000,
-  [RANK.FIRST]: 2000000000,
+  [RANK.FIFTH]: 5_000,
+  [RANK.FOURTH]: 50_000,
+  [RANK.THIRD]: 1_500_000,
+  [RANK.SECOND]: 30_000_000,
+  [RANK.FIRST]: 2_000_000_000,
 };
 
 export const LOTTO_RULE = {
