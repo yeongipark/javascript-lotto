@@ -1,7 +1,6 @@
 import LottoMachine from "../domain/LottoMachine.js";
 import output from "../view/output.js";
 import Winnings from "../domain/Winnings.js";
-import { inputHandler } from "../util/errorHandler.js";
 import input from "../view/input.js";
 import parser from "../util/Parser.js";
 import PurchasePriceValidator from "../domain/\bvalidator/PurcahsePriceValidator.js";
@@ -30,7 +29,7 @@ export default class Main {
       purchasePrice,
     });
 
-    this.inputRestart();
+    await this.#inputRestart();
   }
 
   async #inputPurchasePrice() {
@@ -54,16 +53,9 @@ export default class Main {
     return parsedBonusNumber;
   }
 
-  async inputRestart() {
-    const restart = await inputHandler({
-      inputMethod: "restart",
-      errorName: "RESTART",
-      validatorMethod: "restart",
-    });
-
-    if (restart.toLowerCase() === "y") {
-      return this.play();
-    }
+  async #inputRestart() {
+    const restart = await input.restart();
+    if (restart.toLowerCase() === "y") return this.play();
   }
 
   printStatistics({ winningNumbers, bonusNumber, lottos, purchasePrice }) {
