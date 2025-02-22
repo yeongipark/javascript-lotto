@@ -1,7 +1,7 @@
 import readline from "readline";
-import { INPUT_MESSAGE } from "../constant/Message.js";
+import { INPUT_MESSAGE } from "../constant/message.js";
 
-const Input = {
+const input = {
   async readLineAsync(query) {
     return new Promise((resolve, reject) => {
       if (arguments.length !== 1) {
@@ -48,4 +48,4 @@ const Input = {
   },
 };
 
-export default Input;
+export default input;

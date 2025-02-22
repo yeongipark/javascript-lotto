@@ -1,8 +1,8 @@
 import DEFINITION, { RANK } from "../constant/Definition.js";
-import ERROR from "../constant/Error.js";
-import { OUTPUT_MESSAGE } from "../constant/Message.js";
+import ERROR from "../constant/error.js";
+import { OUTPUT_MESSAGE } from "../constant/message.js";
 
-const Output = {
+const output = {
   print(message) {
     console.log(message);
   },
@@ -42,4 +42,4 @@ const Output = {
   },
 };
 
-export default Output;
+export default output;

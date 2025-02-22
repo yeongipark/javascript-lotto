@@ -1,8 +1,7 @@
-const Parser = {
+const parser = {
   toNumber: (string) => Number(string),
   toSplitNumberArray: (stringNumbers) =>
     stringNumbers.split(",").map((string) => Number(string)),
-  toYNBoolean: (string) => string.toLowerCase() === "y",
 };
 
-export default Parser;
+export default parser;
