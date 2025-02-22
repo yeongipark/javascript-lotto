@@ -1,18 +1,28 @@
 import LottoMachine from "../domain/LottoMachine.js";
-import Validator from "../domain/Validator.js";
-import Output from "../view/Output.js";
-import { throwError } from "../util/util.js";
+import output from "../view/output.js";
 import Winnings from "../domain/Winnings.js";
-import { inputHandler } from "../util/InputHandler.js";
+import { inputHandler } from "../util/errorHandler.js";
+import input from "../view/input.js";
+import parser from "../util/Parser.js";
+import PurchasePriceValidator from "../domain/\bvalidator/PurcahsePriceValidator.js";
+import { errorHandler } from "../util/errorHandler.js";
+import NumbersValidator from "../domain/\bvalidator/NumbersValidator.js";
+import BonusNumberValidator from "../domain/\bvalidator/BonusNumberValidator.js";
 
 export default class Main {
   async play() {
-    const purchasePrice = await this.inputPurchasePrice();
+    const purchasePrice = await errorHandler(
+      this.#inputPurchasePrice.bind(this)
+    );
     const lottos = LottoMachine.createLottos(purchasePrice);
     this.printLottos(lottos);
 
-    const winningNumbers = await this.inputWinningNumbers();
-    const bonusNumber = await this.inputBonus(winningNumbers);
+    const winningNumbers = await errorHandler(
+      this.#inputWinningNumbers.bind(this)
+    );
+    const bonusNumber = await errorHandler(() =>
+      this.#inputBonusNumber.bind(this)(winningNumbers)
+    );
     this.printStatistics({
       winningNumbers,
       bonusNumber,
@@ -23,44 +33,25 @@ export default class Main {
     this.inputRestart();
   }
 
-  async inputPurchasePrice() {
-    const purchasePrice = await inputHandler({
-      inputMethod: "purchasePrice",
-      parser: "toNumber",
-      errorName: "PURCHASE_PRICE",
-      validatorMethod: "purchasePrice",
-    });
-    Output.newLine();
-    return purchasePrice;
+  async #inputPurchasePrice() {
+    const purchasePrice = await input.purchasePrice();
+    const parsedPurchasePrice = parser.toNumber(purchasePrice);
+    PurchasePriceValidator.purchasePrice(parsedPurchasePrice);
+    return parsedPurchasePrice;
   }
 
-  async inputWinningNumbers() {
-    const winningNumbers = await inputHandler({
-      inputMethod: "winningNumbers",
-      parser: "toSplitNumberArray",
-      validatorMethod: "winningNumbers",
-      errorName: "WINNING_NUMBERS",
-    });
-    Output.newLine();
-    return winningNumbers;
+  async #inputWinningNumbers() {
+    const winningNumbers = await input.winningNumbers();
+    const parsedWinningNumbers = parser.toSplitNumberArray(winningNumbers);
+    NumbersValidator.numbers(parsedWinningNumbers);
+    return parsedWinningNumbers;
   }
 
-  async inputBonus(winningNumbers) {
-    try {
-      const bonusNumber = await inputHandler({
-        inputMethod: "bonusNumber",
-        parser: "toNumber",
-        errorName: "BONUS_NUMBER",
-        validatorMethod: "bonusNumber",
-      });
-      const error = Validator.winningsAndBonus(winningNumbers, bonusNumber);
-      Output.printErrorResults(error, "WINNINGS_AND_BONUS");
-      throwError(error);
-      Output.newLine();
-      return bonusNumber;
-    } catch {
-      return this.inputBonus(winningNumbers);
-    }
+  async #inputBonusNumber(winningNumbers) {
+    const bonusNumber = await input.bonusNumber();
+    const parsedBonusNumber = parser.toNumber(bonusNumber);
+    BonusNumberValidator.bonusNumber(winningNumbers, parsedBonusNumber);
+    return parsedBonusNumber;
   }
 
   async inputRestart() {
@@ -76,26 +67,26 @@ export default class Main {
   }
 
   printStatistics({ winningNumbers, bonusNumber, lottos, purchasePrice }) {
-    Output.winningStatistics();
+    output.winningStatistics();
     const winnings = new Winnings(winningNumbers, bonusNumber);
     const countStatistics = winnings.countStatistics(
       lottos.map((lotto) => lotto.numbers)
     );
     Object.entries(countStatistics).forEach(([rank, amount]) =>
-      Output.matchResult(rank, amount)
+      output.matchResult(rank, amount)
     );
 
-    Output.winningRate(
+    output.winningRate(
       winnings.calculateWinningRate(countStatistics, purchasePrice)
     );
-    Output.newLine();
+    output.newLine();
   }
 
   printLottos(lottos) {
-    Output.lottoAmount(lottos.length);
+    output.lottoAmount(lottos.length);
     lottos.forEach((lotto) => {
-      Output.lottoNumbers(lotto.numbers);
+      output.lottoNumbers(lotto.numbers);
     });
-    Output.newLine();
+    output.newLine();
   }
 }

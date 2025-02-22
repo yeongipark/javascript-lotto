@@ -1,5 +1,5 @@
 import validationUtils from "../../util/validationUtil.js";
-import ERROR from "../../constant/Error.js";
+import ERROR from "../../constant/error.js";
 
 export default class PurchasePriceValidator {
   static purchasePrice(money) {
