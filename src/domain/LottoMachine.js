@@ -3,6 +3,7 @@ import PurchasePriceValidator from "./\bvalidator/PurcahsePriceValidator.js";
 import Calculator from "./Calculator.js";
 import Lottos from "./Lottos.js";
 import { LOTTO_LENGTH, LOTTO_NUMBER_RANGE } from "../constant/definition.js";
+import { UNIT } from "../constant/definition.js";
 
 export default class LottoMachine {
   #purchasePrice;
@@ -15,7 +16,7 @@ export default class LottoMachine {
   }
 
   #createLottos(purchasePrice) {
-    const lottos = Array.from({ length: purchasePrice / 1000 }).map(
+    const lottos = Array.from({ length: purchasePrice / UNIT }).map(
       () => new Lotto(this.#generateLottoNumbers())
     );
     return new Lottos(lottos);

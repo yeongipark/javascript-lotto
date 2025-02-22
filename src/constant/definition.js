@@ -29,5 +29,7 @@ export const LOTTO_NUMBER_RANGE = {
   MAX: 45,
 };
 
+export const UNIT = 1_000;
+
 export const SPLIT = ",";
 export const EMPTY = "";

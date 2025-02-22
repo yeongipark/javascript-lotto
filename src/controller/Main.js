@@ -7,6 +7,8 @@ import input from "../view/input.js";
 import parser from "../util/parser.js";
 import { errorHandler } from "../util/errorHandler.js";
 
+const RESTART = "y";
+
 export default class Main {
   #lottoMachine;
 
@@ -69,6 +71,6 @@ export default class Main {
 
   async #inputRestart() {
     const restart = await input.restart();
-    if (restart.toLowerCase() === "y") return this.play();
+    if (restart.toLowerCase() === RESTART) return this.play();
   }
 }

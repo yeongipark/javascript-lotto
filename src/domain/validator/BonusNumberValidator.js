@@ -2,7 +2,7 @@ import validationUtils from "../../util/validationUtil.js";
 import { LOTTO_NUMBER_RANGE } from "../../constant/definition.js";
 
 const BONUS_NUMBER = {
-  IS_NUMBER_RANGE_OVER: "[ERROR] 1~45 사이의 숫자를 입력해야합니다.",
+  IS_NUMBER_RANGE_OVER: `[ERROR] ${LOTTO_NUMBER_RANGE.MIN}~${LOTTO_NUMBER_RANGE.MAX} 사이의 숫자를 입력해야합니다.`,
   IS_NOT_NATURAL_NUMBER: "[ERROR] 숫자는 자연수여야 합니다.",
   IS_DUPLICATED: "[ERROR] 당첨번호와 중복된 숫자는 입력하실 수 없습니다.",
 };
