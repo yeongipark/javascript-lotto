@@ -1,15 +1,24 @@
+import NumbersValidator from "./\bvalidator/NumbersValidator.js";
 export default class Lotto {
-  constructor() {
-    this.numbers = Lotto.generateLottoNumbers();
+  #numbers;
+
+  constructor(numbers) {
+    NumbersValidator.numbers(numbers);
+    this.#numbers = numbers;
   }
 
-  static generateLottoNumbers() {
-    const randomNumbers = [];
-    while (randomNumbers.length < 6) {
-      const randomNumber = Math.floor(Math.random() * 44 + 1);
-      if (randomNumbers.includes(randomNumber)) continue;
-      randomNumbers.push(randomNumber);
-    }
-    return randomNumbers;
+  getNumbers() {
+    return [...this.#numbers];
+  }
+
+  has(number) {
+    return this.#numbers.includes(number);
+  }
+
+  getMatchCount(numbers) {
+    const sumNumbers = [...this.#numbers, ...numbers];
+    const setLotto = new Set(sumNumbers);
+
+    return sumNumbers.length - setLotto.size;
   }
 }
