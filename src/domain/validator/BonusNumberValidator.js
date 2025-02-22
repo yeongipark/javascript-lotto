@@ -1,6 +1,11 @@
 import validationUtils from "../../util/validationUtil.js";
-import ERROR from "../../constant/error.js";
 import { LOTTO_NUMBER_RANGE } from "../../constant/definition.js";
+
+const BONUS_NUMBER = {
+  IS_NUMBER_RANGE_OVER: "[ERROR] 1~45 사이의 숫자를 입력해야합니다.",
+  IS_NOT_NATURAL_NUMBER: "[ERROR] 숫자는 자연수여야 합니다.",
+  IS_DUPLICATED: "[ERROR] 당첨번호와 중복된 숫자는 입력하실 수 없습니다.",
+};
 
 export default class BonusNumberValidator {
   static bonusNumber(winningNumbers, bonusNumber) {
@@ -17,12 +22,12 @@ export default class BonusNumberValidator {
         LOTTO_NUMBER_RANGE.MAX
       )
     )
-      throw new Error(ERROR.BONUS_NUMBER.IS_NUMBER_RANGE_OVER);
+      throw new Error(BONUS_NUMBER.IS_NUMBER_RANGE_OVER);
   }
 
   static #isNotNaturalNumber(bonusNumber) {
     if (validationUtils.isNotNaturalNumber(bonusNumber))
-      throw new Error(ERROR.BONUS_NUMBER.IS_NOT_NATURAL_NUMBER);
+      throw new Error(BONUS_NUMBER.IS_NOT_NATURAL_NUMBER);
   }
 
   static #isDuplicated(winningNumbers, bonusNumber) {
@@ -30,6 +35,6 @@ export default class BonusNumberValidator {
       new Set([...winningNumbers, bonusNumber]).size !==
       winningNumbers.length + 1
     )
-      throw new Error(ERROR.BONUS_NUMBER.IS_DUPLICATED);
+      throw new Error(BONUS_NUMBER.IS_DUPLICATED);
   }
 }

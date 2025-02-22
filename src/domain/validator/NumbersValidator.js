@@ -1,6 +1,12 @@
 import validationUtils from "../../util/validationUtil.js";
-import ERROR from "../../constant/error.js";
 import { LOTTO_NUMBER_RANGE, LOTTO_LENGTH } from "../../constant/definition.js";
+
+const WINNING_NUMBERS = {
+  IS_WRONG_ARRAY_LENGTH: "[ERROR] 로또는 6개의 숫자로 이루어져야합니다.",
+  IS_DUPLICATED_NUMBER: "[ERROR] 중복된 숫자는 입력하실 수 없습니다.",
+  IS_ARRAY_NUMBER_RANGE_OVER: "[ERROR] 1~45 사이의 숫자를 입력해야합니다.",
+  IS_NOT_NATURAL_NUMBER_IN_ARRAY: "[ERROR] 숫자는 자연수여야 합니다.",
+};
 
 export default class NumbersValidator {
   static numbers(numbers) {
@@ -12,17 +18,17 @@ export default class NumbersValidator {
 
   static #isWrongArrayLength(numbers) {
     if (numbers.length !== LOTTO_LENGTH)
-      throw new Error(ERROR.WINNING_NUMBERS.IS_WRONG_ARRAY_LENGTH);
+      throw new Error(WINNING_NUMBERS.IS_WRONG_ARRAY_LENGTH);
   }
 
   static #isNotNaturalNumberInArray(numbers) {
     if (numbers.some((number) => validationUtils.isNotNaturalNumber(number)))
-      throw new Error(ERROR.WINNING_NUMBERS.IS_NOT_NATURAL_NUMBER_IN_ARRAY);
+      throw new Error(WINNING_NUMBERS.IS_NOT_NATURAL_NUMBER_IN_ARRAY);
   }
 
   static #isDuplicatedNumber(numbers) {
     if (new Set(numbers).size !== numbers.length)
-      throw new Error(ERROR.WINNING_NUMBERS.IS_WRONG_ARRAY_LENGTH);
+      throw new Error(WINNING_NUMBERS.IS_WRONG_ARRAY_LENGTH);
   }
 
   static #isArrayNumberRangeOver(numbers) {
@@ -35,6 +41,6 @@ export default class NumbersValidator {
         )
       )
     )
-      throw new Error(ERROR.WINNING_NUMBERS.IS_ARRAY_NUMBER_RANGE_OVER);
+      throw new Error(WINNING_NUMBERS.IS_ARRAY_NUMBER_RANGE_OVER);
   }
 }

@@ -1,6 +1,16 @@
 import { SPLIT, EMPTY, LOTTO_PRISE } from "../constant/definition.js";
-import ERROR from "../constant/error.js";
-import { OUTPUT_MESSAGE } from "../constant/message.js";
+import { RANK, LOTTO_RULE } from "../constant/definition.js";
+
+const OUTPUT_MESSAGE = {
+  LOTTO_AMOUNT: (lottoAmount) => `${lottoAmount}개를 구매했습니다.`,
+  WINNING_STATISTICS: "당첨 통계",
+  BOUNDARY: "--------------------",
+  MATCH_RESULT: (rank, amount, prize) =>
+    `${LOTTO_RULE[rank]}개 일치 ${
+      rank === RANK.SECOND ? "보너스 번호 일치" : ""
+    }(${prize}원) - ${amount}개`,
+  WINNING_RATE: (rate) => `총 수익률은 ${rate}%입니다.`,
+};
 
 const output = {
   print(message) {
