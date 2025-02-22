@@ -55,11 +55,6 @@ export default class Main {
     return parsedBonusNumber;
   }
 
-  async #inputRestart() {
-    const restart = await input.restart();
-    if (restart.toLowerCase() === "y") return this.play();
-  }
-
   printStatistics(winningNumbers, bonusNumber) {
     output.winningStatistics();
     const countStatistics = this.#lottoMachine.getStatistics(
@@ -70,5 +65,10 @@ export default class Main {
     output.matchResult(countStatistics);
     output.winningRate(this.#lottoMachine.getWinningRate(countStatistics));
     output.newLine();
+  }
+
+  async #inputRestart() {
+    const restart = await input.restart();
+    if (restart.toLowerCase() === "y") return this.play();
   }
 }

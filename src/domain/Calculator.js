@@ -1,14 +1,13 @@
-import DEFINITION from "../constant/Definition.js";
-
+import { LOTTO_PRISE, RANK } from "../constant/definition.js";
 export default class Calculator {
   // [{matchCount : 1, isMatchBonusNumber : true}]
   static getStatistics(matchCounts) {
     const rank = {
-      "5등": 0,
-      "4등": 0,
-      "3등": 0,
-      "2등": 0,
-      "1등": 0,
+      [RANK.FIFTH]: 0,
+      [RANK.FOURTH]: 0,
+      [RANK.THIRD]: 0,
+      [RANK.SECOND]: 0,
+      [RANK.FIRST]: 0,
     };
 
     matchCounts.forEach((matchData) => {
@@ -21,20 +20,20 @@ export default class Calculator {
   static #judgeRank({ matchCount, isMatchBonusNumber }, rank) {
     switch (matchCount) {
       case 3: {
-        rank["5등"]++;
+        rank[RANK.FIFTH]++;
         break;
       }
       case 4: {
-        rank["4등"]++;
+        rank[RANK.FOURTH]++;
         break;
       }
       case 5: {
-        if (isMatchBonusNumber) rank["2등"]++;
-        else rank["3등"]++;
+        if (isMatchBonusNumber) rank[RANK.SECOND]++;
+        else rank[RANK.THIRD]++;
         break;
       }
       case 6: {
-        rank["1등"]++;
+        rank[RANK.FIRST]++;
         break;
       }
     }
@@ -42,7 +41,7 @@ export default class Calculator {
 
   static getWinningRate(countStatistics, purchasePrice) {
     const sum = Object.entries(countStatistics).reduce((acc, [key, count]) => {
-      return acc + DEFINITION.LOTTO_PRISE[key] * count;
+      return acc + LOTTO_PRISE[key] * count;
     }, 0);
     return (sum / purchasePrice) * 100;
   }

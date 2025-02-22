@@ -1,4 +1,4 @@
-import DEFINITION, { RANK } from "../constant/Definition.js";
+import { SPLIT, EMPTY, LOTTO_PRISE } from "../constant/definition.js";
 import ERROR from "../constant/error.js";
 import { OUTPUT_MESSAGE } from "../constant/message.js";
 
@@ -14,7 +14,7 @@ const output = {
   lottoNumbers(lottosNumber) {
     lottosNumber.forEach((lottoNumbers) => {
       const sortedLottoNumbers = lottoNumbers.toSorted((a, b) => a - b);
-      this.print(`[${sortedLottoNumbers.join(DEFINITION.SPLIT)}]`);
+      this.print(`[${sortedLottoNumbers.join(`${SPLIT} `)}]`);
     });
   },
 
@@ -24,12 +24,12 @@ const output = {
   },
 
   newLine() {
-    this.print(DEFINITION.EMPTY);
+    this.print(EMPTY);
   },
 
   matchResult(countStatistics) {
     Object.entries(countStatistics).forEach(([rank, amount]) => {
-      const prize = DEFINITION.LOTTO_PRISE[rank].toLocaleString();
+      const prize = LOTTO_PRISE[rank].toLocaleString();
       this.print(OUTPUT_MESSAGE.MATCH_RESULT(rank, amount, prize));
     });
   },

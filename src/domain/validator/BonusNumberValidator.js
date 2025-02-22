@@ -1,5 +1,6 @@
 import validationUtils from "../../util/validationUtil.js";
 import ERROR from "../../constant/error.js";
+import { LOTTO_NUMBER_RANGE } from "../../constant/definition.js";
 
 export default class BonusNumberValidator {
   static bonusNumber(winningNumbers, bonusNumber) {
@@ -9,7 +10,13 @@ export default class BonusNumberValidator {
   }
 
   static #isNumberRangeOver(bonusNumber) {
-    if (validationUtils.isNumberRangeOver(bonusNumber, 1, 45))
+    if (
+      validationUtils.isNumberRangeOver(
+        bonusNumber,
+        LOTTO_NUMBER_RANGE.MIN,
+        LOTTO_NUMBER_RANGE.MAX
+      )
+    )
       throw new Error(ERROR.BONUS_NUMBER.IS_NUMBER_RANGE_OVER);
   }
 
