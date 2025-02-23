@@ -17,7 +17,8 @@ export default class PurchasePriceValidator {
   }
 
   static #isNotMultiple(money) {
-    if (money % 1000 !== 0) throw new Error(PURCHASE_PRICE.IS_NOT_MULTIPLE);
+    if (money % PURCHASE_PRICE_RANGE.MIN !== 0)
+      throw new Error(PURCHASE_PRICE.IS_NOT_MULTIPLE);
   }
 
   static #isNumberRangeOver(money) {
