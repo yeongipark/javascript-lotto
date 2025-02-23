@@ -1,9 +1,6 @@
-import Lotto from "../domain/Lotto.js";
 import PurchasePriceValidator from "./\bvalidator/PurchasePriceValidator.js";
 import Calculator from "./Calculator.js";
 import Lottos from "./Lottos.js";
-import { LOTTO_LENGTH, LOTTO_NUMBER_RANGE } from "../constant/definition.js";
-import { UNIT } from "../constant/definition.js";
 
 export default class LottoMachine {
   #purchasePrice;
@@ -12,25 +9,7 @@ export default class LottoMachine {
   constructor(purchasePrice) {
     PurchasePriceValidator.purchasePrice(purchasePrice);
     this.#purchasePrice = purchasePrice;
-    this.#lottos = this.#createLottos(purchasePrice);
-  }
-
-  #createLottos(purchasePrice) {
-    const lottos = Array.from({ length: purchasePrice / UNIT }).map(
-      () => new Lotto(this.#generateLottoNumbers())
-    );
-    return new Lottos(lottos);
-  }
-
-  #generateLottoNumbers() {
-    const randomNumbers = new Set();
-    while (randomNumbers.size < LOTTO_LENGTH) {
-      const randomNumber = Math.floor(
-        Math.random() * (LOTTO_NUMBER_RANGE.MAX - 1) + 1
-      );
-      randomNumbers.add(randomNumber);
-    }
-    return [...randomNumbers];
+    this.#lottos = new Lottos(purchasePrice);
   }
 
   getLottosNumber() {
