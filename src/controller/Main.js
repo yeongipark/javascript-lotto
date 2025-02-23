@@ -31,7 +31,7 @@ export default class Main {
   async #inputPurchasePrice() {
     const purchasePrice = await input.purchasePrice();
     const parsedPurchasePrice = parser.toNumber(purchasePrice);
-    PurchasePriceValidator.purchasePrice(parsedPurchasePrice);
+    PurchasePriceValidator.validatePurchasePrice(parsedPurchasePrice);
     return parsedPurchasePrice;
   }
 
@@ -46,14 +46,14 @@ export default class Main {
   async #inputWinningNumbers() {
     const winningNumbers = await input.winningNumbers();
     const parsedWinningNumbers = parser.toSplitNumberArray(winningNumbers);
-    NumbersValidator.numbers(parsedWinningNumbers);
+    NumbersValidator.validateNumbers(parsedWinningNumbers);
     return parsedWinningNumbers;
   }
 
   async #inputBonusNumber(winningNumbers) {
     const bonusNumber = await input.bonusNumber();
     const parsedBonusNumber = parser.toNumber(bonusNumber);
-    BonusNumberValidator.bonusNumber(winningNumbers, parsedBonusNumber);
+    BonusNumberValidator.validateBonusNumber(winningNumbers, parsedBonusNumber);
     return parsedBonusNumber;
   }
 

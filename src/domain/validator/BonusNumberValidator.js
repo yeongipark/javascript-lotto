@@ -8,7 +8,7 @@ const BONUS_NUMBER = {
 };
 
 export default class BonusNumberValidator {
-  static bonusNumber(winningNumbers, bonusNumber) {
+  static validateBonusNumber(winningNumbers, bonusNumber) {
     this.#isNumberRangeOver(bonusNumber);
     this.#isNotNaturalNumber(bonusNumber);
     this.#isDuplicated(winningNumbers, bonusNumber);

@@ -11,7 +11,7 @@ const PURCHASE_PRICE = {
 };
 
 export default class PurchasePriceValidator {
-  static purchasePrice(money) {
+  static validatePurchasePrice(money) {
     this.#isNotMultiple(money);
     this.#isNumberRangeOver(money);
   }

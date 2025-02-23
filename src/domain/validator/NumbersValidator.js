@@ -9,7 +9,7 @@ const WINNING_NUMBERS = {
 };
 
 export default class NumbersValidator {
-  static numbers(numbers) {
+  static validateNumbers(numbers) {
     this.#isWrongArrayLength(numbers);
     this.#isNotNaturalNumberInArray(numbers);
     this.#isDuplicatedNumber(numbers);

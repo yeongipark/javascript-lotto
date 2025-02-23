@@ -7,7 +7,7 @@ export default class LottoMachine {
   #lottos;
 
   constructor(purchasePrice) {
-    PurchasePriceValidator.purchasePrice(purchasePrice);
+    PurchasePriceValidator.validatePurchasePrice(purchasePrice);
     this.#purchasePrice = purchasePrice;
     this.#lottos = new Lottos(purchasePrice);
   }

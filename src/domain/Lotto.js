@@ -3,7 +3,7 @@ export default class Lotto {
   #numbers;
 
   constructor(numbers) {
-    NumbersValidator.numbers(numbers);
+    NumbersValidator.validateNumbers(numbers);
     this.#numbers = numbers;
   }
 
