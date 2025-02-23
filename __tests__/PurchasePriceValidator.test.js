@@ -1,11 +1,13 @@
-import PurchasePriceValidator from "../src/domain/\bvalidator/PurcahsePriceValidator";
+import PurchasePriceValidator from "../src/domain/\bvalidator/PurchasePriceValidator";
 
-test("구입 금액이 올바른 경우 예외가 발생하지 않는다.", () => {
-  const validMoney = 5000;
-  expect(() => {
-    PurchasePriceValidator.purchasePrice(validMoney);
-  }).not.toThrow();
-});
+test.each([[5000], [1000], [100000], [20000]])(
+  "구입 금액이 올바른 경우 예외가 발생하지 않는다.",
+  (purchasePrice) => {
+    expect(() => {
+      PurchasePriceValidator.purchasePrice(purchasePrice);
+    }).not.toThrow();
+  }
+);
 
 test("구입 금액이 1000의 배수가 아니면 예외가 발생한다.", () => {
   const nonMultipleMoney = 1500;
