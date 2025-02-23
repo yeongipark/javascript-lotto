@@ -1,5 +1,5 @@
 import Lotto from "../domain/Lotto.js";
-import PurchasePriceValidator from "./\bvalidator/PurcahsePriceValidator.js";
+import PurchasePriceValidator from "./\bvalidator/PurchasePriceValidator.js";
 import Calculator from "./Calculator.js";
 import Lottos from "./Lottos.js";
 import { LOTTO_LENGTH, LOTTO_NUMBER_RANGE } from "../constant/definition.js";
