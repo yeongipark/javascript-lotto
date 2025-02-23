@@ -17,14 +17,14 @@ export default class Main {
     const purchasePrice = await errorHandler(
       this.#inputPurchasePrice.bind(this)
     );
-    this.printLottos(purchasePrice);
+    this.#printLottos(purchasePrice);
     const winningNumbers = await errorHandler(
       this.#inputWinningNumbers.bind(this)
     );
     const bonusNumber = await errorHandler(() =>
       this.#inputBonusNumber.bind(this)(winningNumbers)
     );
-    this.printStatistics(winningNumbers, bonusNumber);
+    this.#printStatistics(winningNumbers, bonusNumber);
     await this.#inputRestart();
   }
 
@@ -35,7 +35,7 @@ export default class Main {
     return parsedPurchasePrice;
   }
 
-  printLottos(purchasePrice) {
+  #printLottos(purchasePrice) {
     this.#lottoMachine = new LottoMachine(purchasePrice);
     const lottos = this.#lottoMachine.getLottosNumber();
     output.lottoAmount(lottos.length);
@@ -57,7 +57,7 @@ export default class Main {
     return parsedBonusNumber;
   }
 
-  printStatistics(winningNumbers, bonusNumber) {
+  #printStatistics(winningNumbers, bonusNumber) {
     output.winningStatistics();
     const countStatistics = this.#lottoMachine.getStatistics(
       winningNumbers,
