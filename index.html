@@ -3,13 +3,98 @@
   <head>
     <meta charset="UTF-8" />
     <title>🎱 행운의 로또</title>
+    <link rel="stylesheet" href="./index.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
 
   <body>
+    <dialog class="result_modal">
+      <div class="modal_wrap">
+        <button class="modal_close_button">&times;</button>
+        <h2 class="modal_title">🏆 당첨 통계 🏆</h2>
+        <table class="modal_statistics">
+          <thead>
+            <tr>
+              <th>일치 갯수</th>
+              <th>당첨금</th>
+              <th>당첨 갯수</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>3개</td>
+              <td>5000</td>
+              <td class="match_count">n개</td>
+            </tr>
+            <tr>
+              <td>4개</td>
+              <td>50,000</td>
+              <td class="match_count">n개</td>
+            </tr>
+            <tr>
+              <td>5개</td>
+              <td>1,500,000</td>
+              <td class="match_count">n개</td>
+            </tr>
+            <tr>
+              <td>5개+보너스볼</td>
+              <td>30,000,000</td>
+              <td class="match_count">n개</td>
+            </tr>
+            <tr>
+              <td>6개</td>
+              <td>2,000,000,000</td>
+              <td class="match_count">n개</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="modal_winning_rate"></p>
+        <button class="modal_restart_button">다시 시작하기</button>
+      </div>
+    </dialog>
+
     <div id="app">
-      <h1>🎱 행운의 로또</h1>
+      <h1 class="title">🎱 행운의 로또</h1>
+      <main>
+        <div class="paper">
+          <h1 class="paper_title">🎱 내 번호 당첨 확인 🎱</h1>
+          <div class="paper_input_price_wrap">
+            <p>구입할 금액을 입력해주세요.</p>
+            <div class="paper_input_price">
+              <input id="inputPrice" type="text" placeholder="금액" />
+              <button id="buyButton">구입</button>
+            </div>
+          </div>
+          <div class="lotto_information_wrap">
+            <p class="lotto_count"></p>
+            <div class="lotto_information"></div>
+
+            <div class="winning_wrap">
+              <p>지난 주 당첨번호 6개와 보너스 번호 1개를 입력해주세요.</p>
+              <div class="winning_text">
+                <p>당첨 번호</p>
+                <p>보너스 번호</p>
+              </div>
+              <div class="winning_input">
+                <div>
+                  <input class="winningNumberInput" type="text" maxlength="2" />
+                  <input class="winningNumberInput" type="text" maxlength="2" />
+                  <input class="winningNumberInput" type="text" maxlength="2" />
+                  <input class="winningNumberInput" type="text" maxlength="2" />
+                  <input class="winningNumberInput" type="text" maxlength="2" />
+                  <input class="winningNumberInput" type="text" maxlength="2" />
+                </div>
+                <input class="bonusNumberInput" type="text" maxlength="2" />
+              </div>
+            </div>
+            <button class="result_button">결과 확인하기</button>
+          </div>
+        </div>
+      </main>
+      <footer>
+        <p class="footer">Copyright 2023. woowacourse</p>
+      </footer>
     </div>
     <script type="module" src="./src/step2-index.js"></script>
   </body>
