@@ -25,27 +25,27 @@
             <tr>
               <td>3개</td>
               <td>5000</td>
-              <td class="match_count">0개</td>
+              <td class="modal_match_count">0개</td>
             </tr>
             <tr>
               <td>4개</td>
               <td>50,000</td>
-              <td class="match_count">0개</td>
+              <td class="modal_match_count">0개</td>
             </tr>
             <tr>
               <td>5개</td>
               <td>1,500,000</td>
-              <td class="match_count">0개</td>
+              <td class="modal_match_count">0개</td>
             </tr>
             <tr>
               <td>5개+보너스볼</td>
               <td>30,000,000</td>
-              <td class="match_count">0개</td>
+              <td class="modal_match_count">0개</td>
             </tr>
             <tr>
               <td>6개</td>
               <td>2,000,000,000</td>
-              <td class="match_count">0개</td>
+              <td class="modal_match_count">0개</td>
             </tr>
           </tbody>
         </table>
@@ -58,35 +58,63 @@
       <h1 class="title">🎱 행운의 로또</h1>
       <main class="paper">
         <h1 class="paper_title">🎱 내 번호 당첨 확인 🎱</h1>
-        <section class="paper_input_price_wrap">
+        <section class="paper_section">
           <p>구입할 금액을 입력해주세요.</p>
-          <div class="paper_input_price">
-            <input id="inputPrice" type="text" placeholder="금액" />
-            <button id="buyButton">구입</button>
+          <div class="paper_input_price_wrap">
+            <input class="paper_input_price" type="text" placeholder="금액" />
+            <button class="paper_buy_button">구입</button>
           </div>
         </section>
-        <section class="lotto_information_wrap">
-          <p class="lotto_count"></p>
-          <section class="lotto_information"></section>
-          <section class="winning_wrap">
+        <section class="paper_lotto_information_wrap">
+          <p class="paper_lotto_count"></p>
+          <section class="paper_lotto_information"></section>
+          <section class="paper_winning_wrap">
             <p>지난 주 당첨번호 6개와 보너스 번호 1개를 입력해주세요.</p>
-            <div class="winning_text">
+            <div class="paper_winning_text">
               <p>당첨 번호</p>
               <p>보너스 번호</p>
             </div>
-            <div class="winning_input">
+            <div class="paper_winning_input_wrap">
               <div>
-                <input class="winningNumberInput" type="text" maxlength="2" />
-                <input class="winningNumberInput" type="text" maxlength="2" />
-                <input class="winningNumberInput" type="text" maxlength="2" />
-                <input class="winningNumberInput" type="text" maxlength="2" />
-                <input class="winningNumberInput" type="text" maxlength="2" />
-                <input class="winningNumberInput" type="text" maxlength="2" />
+                <input
+                  class="paper_winning_number_input"
+                  type="text"
+                  maxlength="2"
+                />
+                <input
+                  class="paper_winning_number_input"
+                  type="text"
+                  maxlength="2"
+                />
+                <input
+                  class="paper_winning_number_input"
+                  type="text"
+                  maxlength="2"
+                />
+                <input
+                  class="paper_winning_number_input"
+                  type="text"
+                  maxlength="2"
+                />
+                <input
+                  class="paper_winning_number_input"
+                  type="text"
+                  maxlength="2"
+                />
+                <input
+                  class="paper_winning_number_input"
+                  type="text"
+                  maxlength="2"
+                />
               </div>
-              <input class="bonusNumberInput" type="text" maxlength="2" />
+              <input
+                class="paper_bonus_number_input"
+                type="text"
+                maxlength="2"
+              />
             </div>
           </section>
-          <button class="result_button">결과 확인하기</button>
+          <button class="paper_result_button">결과 확인하기</button>
         </section>
       </main>
       <footer>
