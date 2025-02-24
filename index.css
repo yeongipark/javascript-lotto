@@ -10,7 +10,10 @@
 input,
 div,
 p,
-button {
+button,
+main,
+section,
+article {
   box-sizing: border-box;
 }
 
