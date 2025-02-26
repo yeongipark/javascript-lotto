@@ -8,22 +8,27 @@ import LottoMachine from "./domain/LottoMachine.js";
 import NumbersValidator from "./domain/\bvalidator/NumbersValidator.js";
 import BonusNumberValidator from "./domain/\bvalidator/BonusNumberValidator.js";
 
-const buyButton = document.querySelector("#buyButton");
-const inputPrice = document.querySelector("#inputPrice");
-const lottoInfoWrap = document.querySelector(".lotto_information_wrap");
-const lottoInfo = document.querySelector(".lotto_information");
-const lottoCount = document.querySelector(".lotto_count");
-const resultButton = document.querySelector(".result_button");
+import { lottoMachine } from "./view/node.js";
+
+const buyButton = document.querySelector(".paper_buy_button");
+const inputPrice = document.querySelector(".paper_input_price");
+const lottoInfoWrap = document.querySelector(".paper_lotto_information_wrap");
+const lottoInfo = document.querySelector(".paper_lotto_information");
+const lottoCount = document.querySelector(".paper_lotto_count");
+const resultButton = document.querySelector(".paper_result_button");
 const modal = document.querySelector(".result_modal");
-const winningNumberInputs = document.querySelectorAll(".winningNumberInput");
-const bonusNumberInput = document.querySelector(".bonusNumberInput");
+const paper_winning_number_inputs = document.querySelectorAll(
+  ".paper_winning_number_input"
+);
+const paper_bonus_number_input = document.querySelector(
+  ".paper_bonus_number_input"
+);
 const modalCloseButton = document.querySelector(".modal_close_button");
 const modalRestartButton = document.querySelector(".modal_restart_button");
-const matchCounts = document.querySelectorAll(".match_count");
+const matchCounts = document.querySelectorAll(".modal_match_count");
 const winningRate = document.querySelector(".modal_winning_rate");
 
-let lottoMachine;
-
+// 금액 입력에서 엔터 누르면 구매되도록
 inputPrice.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     buyButton.click();
@@ -32,40 +37,39 @@ inputPrice.addEventListener("keydown", (e) => {
 
 // 구매하기
 buyButton.addEventListener("click", () => {
-  const price = parser.toNumber(inputPrice.value);
   try {
+    const price = parser.toNumber(inputPrice.value);
+
     PurchasePriceValidator.validatePurchasePrice(price);
     lottoInfoWrap.style.display = "block";
     lottoMachine = new LottoMachine(price);
+
     const lottosNumber = lottoMachine.getLottosNumber();
     lottoCount.textContent = `총 ${lottosNumber.length}개 구매했습니다.`;
 
-    buyButton.disabled = true;
-    inputPrice.disabled = true;
-
-    winningNumberInputs[0].focus();
+    inputPriceBuyButtonDisabled(true);
+    focusFirstNode(paper_winning_number_inputs);
 
     // 로또 데이터 추가
     lottosNumber.forEach((numbers) => {
-      const lottoDiv = document.createElement("div");
-      lottoDiv.classList.add("lotto");
-
-      const ticketIcon = document.createElement("div");
-      ticketIcon.classList.add("ticket_icon");
-      ticketIcon.textContent = "🎟️";
-
-      const lottoNumbersDiv = document.createElement("div");
-      lottoNumbersDiv.classList.add("lotto_number");
-      lottoNumbersDiv.textContent = numbers.sort((a, b) => a - b).join(", ");
+      const lottoDiv = createElement({ tag: "div", className: "lotto" });
+      const ticketIcon = createElement({
+        tag: "div",
+        className: "ticket_icon",
+        text: "🎟️",
+      });
+      const lottoNumbersDiv = createElement({
+        tag: "div",
+        className: "lotto_number",
+        text: numbers.sort((a, b) => a - b).join(", "),
+      });
 
       lottoDiv.appendChild(ticketIcon);
       lottoDiv.appendChild(lottoNumbersDiv);
-
       lottoInfo.appendChild(lottoDiv);
     });
   } catch (error) {
     alert(error.message);
-    lottoInfoWrap.style.display = "none";
     inputPrice.value = "";
   }
 });
@@ -73,18 +77,18 @@ buyButton.addEventListener("click", () => {
 // 당첨 번호 입력과 보너스 번호 입력
 resultButton.addEventListener("click", () => {
   try {
-    const winningNumbers = Array.from(winningNumberInputs).map((winningInput) =>
-      Number(winningInput.value)
+    const winningNumbers = Array.from(paper_winning_number_inputs).map(
+      (winningInput) => Number(winningInput.value)
     );
-    const bonusNumber = Number(bonusNumberInput.value);
+    const bonusNumber = Number(paper_bonus_number_input.value);
 
     NumbersValidator.validateNumbers(winningNumbers);
     BonusNumberValidator.validateBonusNumber(winningNumbers, bonusNumber);
 
-    Array.from(winningNumberInputs).forEach((winningInput) => {
+    Array.from(paper_winning_number_inputs).forEach((winningInput) => {
       winningInput.disabled = true;
     });
-    bonusNumberInput.disabled = true;
+    paper_bonus_number_input.disabled = true;
 
     const statistics = lottoMachine.getStatistics(winningNumbers, bonusNumber);
 
@@ -98,7 +102,6 @@ resultButton.addEventListener("click", () => {
 
     modal.showModal();
   } catch (error) {
-    console.error(error);
     alert(error.message);
   }
 });
@@ -113,16 +116,39 @@ modalRestartButton.addEventListener("click", () => {
   modal.close();
   lottoInfoWrap.style.display = "none";
   inputPrice.value = "";
-  inputPrice.disabled = false;
-  buyButton.disabled = false;
-  Array.from(winningNumberInputs).forEach((winningInput) => {
-    winningInput.disabled = false;
-    winningInput.value = "";
-  });
-  bonusNumberInput.disabled = false;
-  bonusNumberInput.value = "";
 
+  inputPriceBuyButtonDisabled(false);
+  initNodes(paper_winning_number_inputs);
+  initNode(paper_bonus_number_input);
   lottoInfo.innerHTML = "";
 
   inputPrice.focus();
 });
+
+export function disabled(tags, bool) {
+  tags.forEach((tag) => {
+    tag.disabled = bool;
+  });
+}
+
+export function createElement({ tag, className, text }) {
+  const element = document.createElement(tag);
+  if (className) element.classList.add(className);
+  if (text) element.textContent = text;
+  return element;
+}
+
+export function focusFirstNode(nodes) {
+  nodes[0].focus();
+}
+
+export function initNodes(nodes) {
+  Array.from(nodes).forEach((node) => {
+    initNode(node);
+  });
+}
+
+export function initNode(node) {
+  node.disabled = false;
+  node.value = "";
+}
