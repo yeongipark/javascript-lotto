@@ -4,11 +4,15 @@
     <meta charset="UTF-8" />
     <title>🎱 행운의 로또</title>
     <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./src/style/modal.css" />
+    <link rel="stylesheet" href="./src/style/init.css" />
+    <link rel="stylesheet" href="./src/style/paper.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
 
   <body>
+    <!-- 모달 -->
     <dialog class="result_modal">
       <section class="modal_wrap">
         <button class="modal_close_button">&times;</button>
@@ -54,6 +58,7 @@
       </section>
     </dialog>
 
+    <!-- 실제 서비스 -->
     <div id="app">
       <h1 class="title">🎱 행운의 로또</h1>
       <main class="paper">
@@ -121,6 +126,8 @@
         <p class="footer">Copyright 2023. woowacourse</p>
       </footer>
     </div>
+    <script type="module" src="./src/view/node.js"></script>
     <script type="module" src="./src/step2-index.js"></script>
+    <script type="module" src="./src/view/buy.js"></script>
   </body>
 </html>
