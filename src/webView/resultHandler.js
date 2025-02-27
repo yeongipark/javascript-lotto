@@ -3,7 +3,6 @@ import BonusNumberValidator from "../domain/\bvalidator/BonusNumberValidator.js"
 import { disabled } from "../util/webUtil.js";
 import domRefs from "./dom.js";
 
-// 당첨 번호 입력과 보너스 번호 입력
 domRefs.$resultButton.addEventListener("click", () => {
   try {
     const { winningNumbers, bonusNumber } = getWinningAndBonus();

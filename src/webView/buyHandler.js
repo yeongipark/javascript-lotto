@@ -18,7 +18,6 @@ domRefs.$buyButton.addEventListener("click", () => {
     disabled([domRefs.$inputPrice, domRefs.$buyButton], true);
     focusFirstNode(domRefs.$paper_winning_number_inputs);
 
-    // 로또 데이터 추가
     createLotto(lottosNumber);
   } catch (error) {
     alert(error.message);
@@ -26,7 +25,6 @@ domRefs.$buyButton.addEventListener("click", () => {
   }
 });
 
-// 로또 생성
 function createLotto(lottosNumber) {
   lottosNumber.forEach((numbers) => {
     const lottoDiv = createElement({ tag: "div", className: "lotto" });
@@ -47,7 +45,6 @@ function createLotto(lottosNumber) {
   });
 }
 
-// 금액 입력에서 엔터 누르면 구매되도록
 domRefs.$inputPrice.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     domRefs.$buyButton.click();
