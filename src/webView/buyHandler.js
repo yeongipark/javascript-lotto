@@ -4,12 +4,13 @@ import domRefs from "./dom.js";
 import parser from "../util/parser.js";
 import { disabled, focusFirstNode, createElement } from "../util/webUtil.js";
 
-domRefs.$buyButton.addEventListener("click", () => {
+domRefs.$priceForm.addEventListener("submit", (e) => {
+  e.preventDefault();
   try {
     const price = parser.toNumber(domRefs.$inputPrice.value);
     PurchasePriceValidator.validatePurchasePrice(price);
 
-    domRefs.$$lottoInfoWrap.style.display = "block";
+    domRefs.$lottoInfoWrap.style.display = "block";
     domRefs.lottoMachine = new LottoMachine(price);
 
     const lottosNumber = domRefs.lottoMachine.getLottosNumber();
@@ -44,9 +45,3 @@ function createLotto(lottosNumber) {
     domRefs.$lottoInfo.appendChild(lottoDiv);
   });
 }
-
-domRefs.$inputPrice.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    domRefs.$buyButton.click();
-  }
-});
