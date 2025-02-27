@@ -19,7 +19,7 @@ domRefs.$winningForm.addEventListener("submit", (e) => {
 
     displayResult(statistics);
 
-    domRefs.modal.showModal();
+    domRefs.$modal.showModal();
   } catch (error) {
     alert(error.message);
     console.error(error);

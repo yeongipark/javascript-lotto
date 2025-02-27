@@ -2,7 +2,7 @@ import domRefs from "./dom.js";
 import { disabled, initNode, initNodes } from "../util/webUtil.js";
 
 domRefs.$modalRestartButton.addEventListener("click", () => {
-  domRefs.modal.close();
+  domRefs.$modal.close();
   domRefs.$lottoInfoWrap.style.display = "none";
   domRefs.$inputPrice.value = "";
 

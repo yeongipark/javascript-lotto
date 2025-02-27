@@ -6,7 +6,7 @@ const domRefs = {
   $lottoInfo: document.querySelector(".paper_lotto_information"),
   $lottoCount: document.querySelector(".paper_lotto_count"),
   $winningForm: document.querySelector(".paper_winning_form"),
-  modal: document.querySelector(".result_modal"),
+  $modal: document.querySelector(".result_modal"),
   $paper_winning_number_inputs: document.querySelectorAll(
     ".paper_winning_number_input"
   ),
