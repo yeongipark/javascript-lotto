@@ -3,7 +3,8 @@ import BonusNumberValidator from "../domain/\bvalidator/BonusNumberValidator.js"
 import { disabled } from "../util/webUtil.js";
 import domRefs from "./dom.js";
 
-domRefs.$resultButton.addEventListener("click", () => {
+domRefs.$winningForm.addEventListener("submit", (e) => {
+  e.preventDefault();
   try {
     const { winningNumbers, bonusNumber } = getWinningAndBonus();
 
