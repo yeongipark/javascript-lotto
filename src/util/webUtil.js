@@ -1,5 +1,5 @@
-export function disabled(tags, bool) {
-  tags.forEach((tag) => {
+export function disabled($tags, bool) {
+  $tags.forEach((tag) => {
     tag.disabled = bool;
   });
 }
@@ -11,17 +11,17 @@ export function createElement({ tag, className, text }) {
   return element;
 }
 
-export function focusFirstNode(nodes) {
-  nodes[0].focus();
+export function focusFirstNode($nodes) {
+  $nodes[0].focus();
 }
 
-export function initNodes(nodes) {
-  Array.from(nodes).forEach((node) => {
-    initNode(node);
+export function initNodes($nodes) {
+  Array.from($nodes).forEach(($node) => {
+    initNode($node);
   });
 }
 
-export function initNode(node) {
-  node.disabled = false;
-  node.value = "";
+export function initNode($node) {
+  $node.disabled = false;
+  $node.value = "";
 }
