@@ -16,7 +16,7 @@ const domRefs = {
   $modalRestartButton: document.querySelector(".modal_restart_button"),
   $matchCounts: document.querySelectorAll(".modal_match_count"),
   $winningRate: document.querySelector(".modal_winning_rate"),
-  $lottoMachine: null,
+  lottoMachine: null,
 };
 
 export default domRefs;

@@ -1,4 +1,4 @@
-import $lottoMachine from "../domain/LottoMachine.js";
+import LottoMachine from "../domain/LottoMachine.js";
 import PurchasePriceValidator from "../domain/\bvalidator/PurchasePriceValidator.js";
 import domRefs from "./dom.js";
 import parser from "../util/parser.js";
@@ -10,9 +10,9 @@ domRefs.$buyButton.addEventListener("click", () => {
     PurchasePriceValidator.validatePurchasePrice(price);
 
     domRefs.$$lottoInfoWrap.style.display = "block";
-    domRefs.$lottoMachine = new $lottoMachine(price);
+    domRefs.lottoMachine = new LottoMachine(price);
 
-    const lottosNumber = domRefs.$lottoMachine.getLottosNumber();
+    const lottosNumber = domRefs.lottoMachine.getLottosNumber();
     domRefs.$lottoCount.textContent = `총 ${lottosNumber.length}개 구매했습니다.`;
 
     disabled([domRefs.$inputPrice, domRefs.$buyButton], true);

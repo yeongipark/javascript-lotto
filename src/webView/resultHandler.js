@@ -11,7 +11,7 @@ domRefs.$resultButton.addEventListener("click", () => {
     disabled(Array.from(domRefs.$paper_winning_number_inputs), true);
     disabled([domRefs.$paper_bonus_number_input], true);
 
-    const statistics = domRefs.$lottoMachine.getStatistics(
+    const statistics = domRefs.lottoMachine.getStatistics(
       winningNumbers,
       bonusNumber
     );
@@ -39,12 +39,12 @@ function winningAndBonusValidate(winningNumbers, bonusNumber) {
 }
 
 function displayResult(statistics) {
-  Array.from(domRefs.$matchCounts).forEach((matchCount, index) => {
+  Array.from(domRefs.$matchCounts).forEach(($matchCount, index) => {
     const counts = Object.values(statistics);
-    matchCount.textContent = counts[index] + "개";
+    $matchCount.textContent = counts[index] + "개";
   });
 
-  const rate = domRefs.$lottoMachine.getWinningRate(statistics);
+  const rate = domRefs.lottoMachine.getWinningRate(statistics);
   domRefs.$winningRate.innerHTML = `당신의 총 수익률은 ${rate.toFixed(
     2
   )}%입니다.`;
