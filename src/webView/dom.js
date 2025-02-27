@@ -1,7 +1,8 @@
 const domRefs = {
+  $priceForm: document.querySelector(".paper_price_form"),
   $buyButton: document.querySelector(".paper_buy_button"),
-  $inputPrice: document.querySelector(".paper_input_price"),
-  $$lottoInfoWrap: document.querySelector(".paper_lotto_information_wrap"),
+  $inputPrice: document.querySelector(".paper_price_input"),
+  $lottoInfoWrap: document.querySelector(".paper_lotto_information_wrap"),
   $lottoInfo: document.querySelector(".paper_lotto_information"),
   $lottoCount: document.querySelector(".paper_lotto_count"),
   $resultButton: document.querySelector(".paper_result_button"),

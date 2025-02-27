@@ -3,7 +3,7 @@ import { disabled, initNode, initNodes } from "../util/webUtil.js";
 
 domRefs.$modalRestartButton.addEventListener("click", () => {
   domRefs.modal.close();
-  domRefs.$$lottoInfoWrap.style.display = "none";
+  domRefs.$lottoInfoWrap.style.display = "none";
   domRefs.$inputPrice.value = "";
 
   disabled([domRefs.$inputPrice, domRefs.$buyButton]);
