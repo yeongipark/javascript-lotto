@@ -1,4 +1,5 @@
 import LottoMachine from "../domain/LottoMachine.js";
+import { lottoState } from "./lottoState.js";
 import PurchasePriceValidator from "../domain/\bvalidator/PurchasePriceValidator.js";
 import domRefs from "./dom.js";
 import parser from "../util/parser.js";
@@ -11,9 +12,9 @@ domRefs.$priceForm.addEventListener("submit", (e) => {
     PurchasePriceValidator.validatePurchasePrice(price);
 
     domRefs.$lottoInfoWrap.style.display = "block";
-    domRefs.lottoMachine = new LottoMachine(price);
+    lottoState.lottoMachine = new LottoMachine(price);
 
-    displayLottoInfo(domRefs.lottoMachine);
+    displayLottoInfo(lottoState.lottoMachine);
   } catch (error) {
     alert(error.message);
     domRefs.$inputPrice.value = "";
