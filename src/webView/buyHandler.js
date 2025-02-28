@@ -13,18 +13,22 @@ domRefs.$priceForm.addEventListener("submit", (e) => {
     domRefs.$lottoInfoWrap.style.display = "block";
     domRefs.lottoMachine = new LottoMachine(price);
 
-    const lottosNumber = domRefs.lottoMachine.getLottosNumber();
-    domRefs.$lottoCount.textContent = `총 ${lottosNumber.length}개 구매했습니다.`;
-
-    disabled([domRefs.$inputPrice, domRefs.$buyButton], true);
-    focusFirstNode(domRefs.$paper_winning_number_inputs);
-
-    createLotto(lottosNumber);
+    displayLottoInfo(domRefs.lottoMachine);
   } catch (error) {
     alert(error.message);
     domRefs.$inputPrice.value = "";
   }
 });
+
+function displayLottoInfo(lottoMachine) {
+  const lottosNumber = lottoMachine.getLottosNumber();
+  domRefs.$lottoCount.textContent = `총 ${lottosNumber.length}개 구매했습니다.`;
+
+  disabled([domRefs.$inputPrice, domRefs.$buyButton], true);
+  focusFirstNode(domRefs.$paper_winning_number_inputs);
+
+  createLotto(lottosNumber);
+}
 
 function createLotto(lottosNumber) {
   lottosNumber.forEach((numbers) => {
