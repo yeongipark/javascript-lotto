@@ -28,11 +28,13 @@ function displayLottoInfo(lottoMachine) {
   disabled([domRefs.$inputPrice, domRefs.$buyButton], true);
   focusFirstNode(domRefs.$paper_winning_number_inputs);
 
-  createLotto(lottosNumber);
+  createLottos(lottosNumber);
 }
 
-function createLotto(lottosNumber) {
-  lottosNumber.forEach((numbers) => {
+function createLottos(lottosNumber) {
+  const fragment = document.createDocumentFragment();
+
+  const lottoDivs = lottosNumber.map((numbers) => {
     const lottoDiv = createElement({ tag: "div", className: "lotto" });
     const ticketIcon = createElement({
       tag: "div",
@@ -47,6 +49,9 @@ function createLotto(lottosNumber) {
 
     lottoDiv.appendChild(ticketIcon);
     lottoDiv.appendChild(lottoNumbersDiv);
-    domRefs.$lottoInfo.appendChild(lottoDiv);
+    return lottoDiv;
   });
+
+  lottoDivs.forEach((lottoDiv) => fragment.appendChild(lottoDiv));
+  domRefs.$lottoInfo.appendChild(fragment);
 }
