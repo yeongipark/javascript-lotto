@@ -41,8 +41,9 @@ function winningAndBonusValidate(winningNumbers, bonusNumber) {
 }
 
 function displayResult(statistics) {
+  const counts = Object.values(statistics);
+
   Array.from(domRefs.$matchCounts).forEach(($matchCount, index) => {
-    const counts = Object.values(statistics);
     $matchCount.textContent = counts[index] + "개";
   });
 
