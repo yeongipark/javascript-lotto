@@ -9,11 +9,11 @@
   color: black;
 }
 
-.result_modal::backdrop {
+.modal_result::backdrop {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.result_modal {
+.modal_result {
   border: none;
   border-radius: 4px;
 }
